@@ -1,0 +1,71 @@
+#Serverless file to deploy our resources on AWS with a command sls deploy
+service: seatreservation
+frameworkVersion: '3'
+custom:
+    stage: ${opt:stage,self:provider.stage}
+    seatReservationTable: ${self:custom.stage}-seat-reservation-table
+    tableThroughput: 
+          dev: 1
+          prod: 7
+    dynamodb:
+      stages:
+        - dev
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: 
+          - "dynamodb:Query"
+          - "dynamodb:Scan"
+          - "dynamodb:GetItem"
+          - "dynamodb:PutItem"
+          - "dynamodb:UpdateItem"
+          - "dynamodb:DeleteItem"
+          - "dynamodb:BatchWriteItem"
+      Resource:
+          - "Fn::GetAtt" : [SeatReservationTable, Arn]
+
+  #Creating the environment variables
+  environment:
+    SEAT_RESERVATION_TABLE: ${self:custom.seatReservationTable}
+
+functions:
+  ReserveTrainSeats:
+    handler: src/handlers/ReserveSeats.reserve
+    tags:
+      fName: ${self:service}-${self:custom.stage}-reserve-seats
+    events:
+      - http:
+          path: user/booking/reserve
+          method: get
+          cors: true
+          private: true
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+resources:
+  Resources:
+    SeatReservationTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+          TableName: ${self:custom.seatReservationTable}
+          AttributeDefinitions:
+            - AttributeName: Coach
+              AttributeType: S
+            - AttributeName: Row
+              AttributeType: N
+          KeySchema:
+            - AttributeName: Coach
+              KeyType: HASH
+            - AttributeName: Row
+              KeyType: RANGE
+          ProvisionedThroughput:
+              ReadCapacityUnits: ${self:custom.tableThroughput.${self:custom.stage}}
+              WriteCapacityUnits: ${self:custom.tableThroughput.${self:custom.stage}}
+

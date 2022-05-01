@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "54267e28-8d0f-4a92-9821-33f450a5d72e",
+		"name": "RailReservation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/user/booking/reserve?seats=1",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{API_KEY_HERE}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/dev/user/booking/reserve?seats=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"user",
+						"booking",
+						"reserve"
+					],
+					"query": [
+						{
+							"key": "seats",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": {
+    "message": {
+        "reservationStatus": "BOOKED",
+        "reservedSeats": [
+            "6 - A"
+        ],
+        "allSeatsStatus": {
+            "1-A": "Booked",
+            "1-B": "Booked",
+            "1-C": "Booked",
+            "1-D": "Booked",
+            "1-E": "Booked",
+            "1-F": "Booked",
+            "1-G": "Booked",
+            "2-A": "Booked",
+            "2-B": "Booked",
+            "2-C": "Booked",
+            "2-D": "Booked",
+            "2-E": "Booked",
+            "2-F": "Booked",
+            "2-G": "Booked",
+            "3-A": "Booked",
+            "3-B": "Booked",
+            "3-C": "Booked",
+            "3-D": "Booked",
+            "3-E": "Booked",
+            "3-F": "Booked",
+            "3-G": "Booked",
+            "4-A": "Booked",
+            "4-B": "Booked",
+            "4-C": "Booked",
+            "4-D": "Booked",
+            "4-E": "Booked",
+            "4-F": "Booked",
+            "4-G": "Booked",
+            "5-A": "Booked",
+            "5-B": "Booked",
+            "5-C": "Booked",
+            "5-D": "Booked",
+            "5-E": "Booked",
+            "5-F": "Booked",
+            "5-G": "Booked",
+            "6-A": "Booked",
+            "6-B": "Available",
+            "6-C": "Available",
+            "6-D": "Available",
+            "6-E": "Available",
+            "6-F": "Available",
+            "6-G": "Available",
+            "7-A": "Available",
+            "7-B": "Available",
+            "7-C": "Available",
+            "7-D": "Available",
+            "7-E": "Available",
+            "7-F": "Available",
+            "7-G": "Available",
+            "8-A": "Available",
+            "8-B": "Available",
+            "8-C": "Available",
+            "8-D": "Available",
+            "8-E": "Available",
+            "8-F": "Available",
+            "8-G": "Available",
+            "9-A": "Available",
+            "9-B": "Available",
+            "9-C": "Available",
+            "9-D": "Available",
+            "9-E": "Available",
+            "9-F": "Available",
+            "9-G": "Available",
+            "10-A": "Available",
+            "10-B": "Available",
+            "10-C": "Available",
+            "10-D": "Available",
+            "10-E": "Available",
+            "10-F": "Available",
+            "10-G": "Available",
+            "11-A": "Booked",
+            "11-B": "Booked",
+            "11-C": "Booked"
+        }
+    }
+}
+		}
+	]
+}
